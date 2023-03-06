@@ -10,7 +10,7 @@ namespace MobileAppTARgv21
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new Start_Page());
         }
 
         protected override void OnStart()
