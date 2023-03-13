@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MobileAppTARgv21
@@ -6,67 +8,36 @@ namespace MobileAppTARgv21
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Start_Page : ContentPage
     {
+        List<ContentPage> pages = new List<ContentPage>() 
+        { new Editor_Page(), new Timer_Page(), new Box_Page(), new TrafficLight_Page(), new DateTime_Page(), new StepperSlider_Page(),
+        new ColorSlider_Page()};
+
+        List<string> texts = new List<string>
+        { "Editor Page", "Timer Page", "Box Page", "Traffic Light Page", "Date/Time Page", "Stepper slider Page", "Color Slider Page" };
+        Random random = new Random();
         public Start_Page()
         {
-            //InitializeComponent();
-
-            Button Editor_btn = new Button 
-            {
-                Text= "Editor Page",
-                BackgroundColor = Color.LightCyan
-            };
-
-            Button Timer_btn = new Button
-            {
-                Text = "Timer Page",
-                BackgroundColor = Color.LightBlue
-            };
-
-            Button Box_btn = new Button
-            {
-                Text = "Box Page",
-                BackgroundColor = Color.LightCyan
-            };
-
-            Button TrafficLight_btn = new Button
-            {
-                Text = "Traffic Light Page",
-                BackgroundColor = Color.LightBlue
-            };
-
             StackLayout st = new StackLayout();
 
-            st.Children.Add(Editor_btn);
-            st.Children.Add(Timer_btn);
-            st.Children.Add(Box_btn);
-            st.Children.Add(TrafficLight_btn);
+            for (int i = 0; i < pages.Count; i++)
+            {
+                Button button = new Button
+                {
+                    Text = texts[i],
+                    BackgroundColor = Color.FromRgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)),
+                    TabIndex= i
+                };
+                st.Children.Add(button);
+                button.Clicked += Button_Clicked;
+            }
 
             Content = st;
-
-            Editor_btn.Clicked += Editor_btn_Clicked;
-            Timer_btn.Clicked += Timer_btn_Clicked;
-            Box_btn.Clicked += Box_btn_Clicked;
-            TrafficLight_btn.Clicked += TrafficLight_btn_Clicked;
         }
 
-        private async void TrafficLight_btn_Clicked(object sender, System.EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TrafficLight_Page());
-        }
-
-        private async void Box_btn_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new Box_Page());
-        }
-
-        private async void Timer_btn_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new Timer_Page());
-        }
-
-        private async void Editor_btn_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new Editor_Page());
+            Button b = sender as Button;
+            await Navigation.PushAsync(pages[b.TabIndex]);
         }
     }
 }
