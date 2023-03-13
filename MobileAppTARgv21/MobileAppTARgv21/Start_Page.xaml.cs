@@ -28,17 +28,30 @@ namespace MobileAppTARgv21
                 BackgroundColor = Color.LightCyan
             };
 
+            Button TrafficLight_btn = new Button
+            {
+                Text = "Traffic Light Page",
+                BackgroundColor = Color.LightBlue
+            };
+
             StackLayout st = new StackLayout();
 
             st.Children.Add(Editor_btn);
             st.Children.Add(Timer_btn);
             st.Children.Add(Box_btn);
+            st.Children.Add(TrafficLight_btn);
 
             Content = st;
 
             Editor_btn.Clicked += Editor_btn_Clicked;
             Timer_btn.Clicked += Timer_btn_Clicked;
             Box_btn.Clicked += Box_btn_Clicked;
+            TrafficLight_btn.Clicked += TrafficLight_btn_Clicked;
+        }
+
+        private async void TrafficLight_btn_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new TrafficLight_Page());
         }
 
         private async void Box_btn_Clicked(object sender, System.EventArgs e)

@@ -40,11 +40,11 @@ namespace MobileAppTARgv21
             }
         }
 
-        private async void back_btn_Clicked(object sender, EventArgs e)
+        private async void Back_btn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }
 
-        
+
     }
 }

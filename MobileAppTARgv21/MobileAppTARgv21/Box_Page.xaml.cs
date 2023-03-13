@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -45,7 +41,7 @@ namespace MobileAppTARgv21
             }
         }
 
-        private async void back_btn_Clicked(object sender, EventArgs e)
+        private async void Back_btn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }

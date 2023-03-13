@@ -17,7 +17,7 @@
             <Button x:Name="back_btn"
                 Text="Back"
                     FontSize="Subtitle"
-                    Clicked="back_btn_Clicked">
+                    Clicked="Back_btn_Clicked">
             </Button>
         </StackLayout>
     </ContentPage.Content>
