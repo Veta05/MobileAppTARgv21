@@ -16,7 +16,7 @@ namespace MobileAppTARgv21
         {
             cirkleRed = new BoxView
             {
-                BackgroundColor = Color.Red,
+                BackgroundColor = Color.Gray,
                 CornerRadius = 1000,
                 WidthRequest = 200,
                 HeightRequest = 200,
@@ -25,7 +25,7 @@ namespace MobileAppTARgv21
 
             cirkleYellow = new BoxView
             {
-                BackgroundColor = Color.Yellow,
+                BackgroundColor = Color.Gray,
                 CornerRadius = 1000,
                 WidthRequest = 200,
                 HeightRequest = 200,
@@ -34,7 +34,7 @@ namespace MobileAppTARgv21
 
             cirkleGreen = new BoxView
             {
-                BackgroundColor = Color.Green,
+                BackgroundColor = Color.Gray,
                 CornerRadius = 1000,
                 WidthRequest = 200,
                 HeightRequest = 200,
@@ -120,12 +120,17 @@ namespace MobileAppTARgv21
         private void On_Clicked(object sender, EventArgs e)
         {
             isOn = true;
-            
+            cirkleRed.BackgroundColor = Color.Red;
+            cirkleYellow.BackgroundColor = Color.Yellow;
+            cirkleGreen.BackgroundColor = Color.Green;
         }
 
         private void Off_Clicked(object sender, EventArgs e)
         {
             isOn = false;
+            cirkleRed.BackgroundColor = Color.Gray;
+            cirkleYellow.BackgroundColor = Color.Gray;
+            cirkleGreen.BackgroundColor = Color.Gray;
         }
     }
 }
