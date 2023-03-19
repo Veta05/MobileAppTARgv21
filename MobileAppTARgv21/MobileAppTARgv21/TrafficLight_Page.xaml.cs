@@ -1,5 +1,4 @@
 ﻿using System;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,66 +8,124 @@ namespace MobileAppTARgv21
     public partial class TrafficLight_Page : ContentPage
     {
         BoxView cirkleRed;
-        Frame cirkleYellow;
-        Frame cirkleGreen;
+        BoxView cirkleYellow;
+        BoxView cirkleGreen;
+        private bool isOn = false;
 
         public TrafficLight_Page()
-        { 
-            //TapGestureRecognizer tap_one= new TapGestureRecognizer();
-            //TapGestureRecognizer tap_two = new TapGestureRecognizer();
-            //TapGestureRecognizer tap_three = new TapGestureRecognizer();
+        {
             cirkleRed = new BoxView
             {
-                BackgroundColor = Color.Gray,
+                BackgroundColor = Color.Red,
                 CornerRadius = 1000,
-                WidthRequest = 100,
-                HeightRequest = 100,
+                WidthRequest = 200,
+                HeightRequest = 200,
+                HorizontalOptions = LayoutOptions.Center,
+            };   
+
+            cirkleYellow = new BoxView
+            {
+                BackgroundColor = Color.Yellow,
+                CornerRadius = 1000,
+                WidthRequest = 200,
+                HeightRequest = 200,
                 HorizontalOptions = LayoutOptions.Center,
             };
-            //tap_one.Tapped += Tap_Tapped_One;
-            //cirkleRed.GestureRecognizers.Add(tap_one); //связан с распознованием жестов
 
-            //cirkleYellow = new Frame
-            //{
-            //    BackgroundColor = Color.Gray,
-            //    CornerRadius = 1000,
-            //    WidthRequest = 100,
-            //    HeightRequest= 100,
-            //    HorizontalOptions = LayoutOptions.Center,
-            //};
-            ////tap_two.Tapped += Tap_Tapped_Two;
-            ////cirkleGreen.GestureRecognizers.Add(tap_two); //связан с распознованием жестов
+            cirkleGreen = new BoxView
+            {
+                BackgroundColor = Color.Green,
+                CornerRadius = 1000,
+                WidthRequest = 200,
+                HeightRequest = 200,
+                HorizontalOptions = LayoutOptions.Center,
+            };
 
-            //cirkleGreen = new Frame
-            //{
-            //    BackgroundColor = Color.Gray,
-            //    CornerRadius = 1000,
-            //    WidthRequest = 100,
-            //    HeightRequest = 100,
-            //    HorizontalOptions = LayoutOptions.Center,
-            //};
-            //tap_three.Tapped += Tap_Tapped_Three;
-            //cirkleGreen.GestureRecognizers.Add(tap_three); //связан с распознованием жестов
+            var tapGestureRecognizerRed = new TapGestureRecognizer();
+            tapGestureRecognizerRed.Tapped += (s, e) => {
+                if (isOn)
+                {
+                    DisplayAlert("Red", "Stop", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Error", "Traffic light is off", "OK");
+                }
+            };
+            cirkleRed.GestureRecognizers.Add(tapGestureRecognizerRed);
+
+            var tapGestureRecognizerYellow = new TapGestureRecognizer();
+            tapGestureRecognizerYellow.Tapped += (s, e) => {
+                if (isOn)
+                {
+                    DisplayAlert("Yellow", "Wait", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Error", "Traffic light is off", "OK");
+                }
+            };
+            cirkleYellow.GestureRecognizers.Add(tapGestureRecognizerYellow);
+
+            var tapGestureRecognizerGreen = new TapGestureRecognizer();
+            tapGestureRecognizerGreen.Tapped += (s, e) => {
+                if (isOn)
+                {
+                    DisplayAlert("Green", "Go", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Error", "Traffic light is off", "OK");
+                }
+            };
+            cirkleGreen.GestureRecognizers.Add(tapGestureRecognizerGreen);
+
+            Grid buttonGrid = new Grid
+            {
+                ColumnDefinitions = {
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                }
+            };
+
+
+            Button on = new Button
+            {
+                Text = "On",
+                BackgroundColor = Color.Green,
+            };
+            on.Clicked += On_Clicked;
+
+            Button off = new Button
+            {
+                Text = "Off",
+                BackgroundColor = Color.Red,
+            };
+            off.Clicked += Off_Clicked;
+
+
+            buttonGrid.Children.Add(on, 0, 0);
+            buttonGrid.Children.Add(off, 1, 0);
+
 
             StackLayout stack = new StackLayout
             {
-                Children = { cirkleRed}
+                Children = { cirkleRed, cirkleYellow, cirkleGreen, buttonGrid}
             };
+            stack.BackgroundColor = Color.White;
+            Content = stack;
 
         }
-        //private void Tap_Tapped_One(object sender, EventArgs e)
-        //{
-        //    BackgroundColor = Color.Red;
-        //}
-        
-        //private void Tap_Tapped_Two(object sender, EventArgs e)
-        //{
-        //    BackgroundColor = Color.Yellow;
-        //}
 
-        //private void Tap_Tapped_Three(object sender, EventArgs e)
-        //{
-        //    BackgroundColor = Color.Green;
-        //}
+        private void On_Clicked(object sender, EventArgs e)
+        {
+            isOn = true;
+            
+        }
+
+        private void Off_Clicked(object sender, EventArgs e)
+        {
+            isOn = false;
+        }
     }
 }
