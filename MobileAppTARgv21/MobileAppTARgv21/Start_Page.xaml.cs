@@ -10,16 +10,17 @@ namespace MobileAppTARgv21
     {
         List<ContentPage> pages = new List<ContentPage>() 
         { new Editor_Page(), new Timer_Page(), new Box_Page(), new TrafficLight_Page(), new DateTime_Page(), new StepperSlider_Page(),
-        new ColorSlider_Page(), new Image_Page(), new Frame_Page(), new PopUp_Page(), new Riddles_Page()};
+        new ColorSlider_Page(), new Image_Page(), new Frame_Page(), new PopUp_Page(), new Riddles_Page(), new Table_Page(), new Picker_Page(),
+        new File_Page(), new Cats_Page()};
 
         List<string> texts = new List<string>
         { "Editor Page", "Timer Page", "Box Page", "Traffic Light Page", "Date/Time Page", "Stepper slider Page",
-            "Color Slider Page", "Image Pgae", "Frame Page", "PopUp Page", "Riddle Page"};
+            "Color Slider Page", "Image Pgae", "Frame Page", "PopUp Page", "Riddle Page", "Table Page", "Picker Page", "File Page", "Cats page"};
         Random random = new Random();
+        StackLayout st;
         public Start_Page()
         {
-            StackLayout st = new StackLayout();
-
+            st = new StackLayout();
             for (int i = 0; i < pages.Count; i++)
             {
                 Button button = new Button
@@ -31,8 +32,8 @@ namespace MobileAppTARgv21
                 st.Children.Add(button);
                 button.Clicked += Button_Clicked;
             }
-
-            Content = st;
+            ScrollView scrollView = new ScrollView { Content=st};
+            Content = scrollView;
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
